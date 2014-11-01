@@ -105,12 +105,66 @@ public class Miscellaneous {
 		return longestSubstring;
 	}
 	
+	public static int maximumWalk (int[] inputArray1, int[] inputArray2) {
+		
+		int sum = 0;
+		int sum1 = 0;
+		int sum2 = 0;
+		int i = 0;
+		int j = 0;
+		
+		while (i < inputArray1.length && j < inputArray2.length) {
+			
+			if (inputArray1[i] < inputArray2[j]) {
+				sum1 += inputArray1[i];
+				i++;
+			}
+			else if (inputArray1[i] > inputArray2[j]) {
+				sum2 += inputArray2[j];
+				j++;
+			}
+			else {
+				sum1 += inputArray1[i];
+				sum2 += inputArray2[j];
+				if (sum1 > sum2) {
+					sum += sum1;
+				} else {
+					sum += sum2;
+				}
+				sum1 = 0;
+				sum2 = 0;
+				i++;
+				j++;
+			}
+		}
+		
+		for (int m = i; m < inputArray1.length; m++) {
+			sum1 += inputArray1[m];
+		}
+		
+		for (int m = j; m < inputArray2.length; m++) {
+			sum2 += inputArray2[m];
+		}
+		
+		if (sum1 > sum2) {
+			sum += sum1;
+		} else {
+			sum += sum2;
+		}
+		
+		return sum;
+	}
+	
 	public static void main(String[] args) {
 //		int[] input = {3,4,5,6,7,1,2};
 //		System.out.println(rotatedArray(input));
 //		System.out.println(palindromeSubstrings("abba"));
 //		codeString(123);
-		System.out.println(longestSubstring("aaaabbcccccdddeeeeff"));
+//		System.out.println(longestSubstring("aaaabbcccccdddeeeeff"));
+		int[] input1 = {2,4,6,8,10,12,13,16,18,21};
+		int[] input2 = {1,4,5,7,8,11,13,19,20};
+		
+		System.out.println(maximumWalk(input1, input2));
 	}
 
 }
