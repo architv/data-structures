@@ -657,6 +657,12 @@ public class BinaryTree {
 		
 		return (isBST(root.left, min, root.data) && isBST(root.right, root.data, max));
 	}
+
+	public static BinaryTreeNode<Integer> replaceNodeValueWithDepth (BinaryTreeNode<Integer> root) {
+		
+		
+		return null;
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

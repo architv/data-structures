@@ -1,11 +1,6 @@
 package hashmaps;
 
 import java.util.HashMap;
-import java.util.Set;
-
-import org.omg.PortableInterceptor.INACTIVE;
-
-import assignment.BinaryTreeNode;
 
 public class HashMapUse {
 
@@ -67,8 +62,8 @@ public class HashMapUse {
 		for (int i = 0; i < input.length; i++) {
 			for (int j = i + 1; j < input.length; j++) {
 				int pairSum = input[i] + input[j];
-				if (pairs.containsKey(-pairSum) && pairs.get(-pairSum).first != i &&
-						pairs.get(-pairSum).second != j) {
+				if (pairs.containsKey(-pairSum) && pairs.get(-pairSum).first > j &&
+						pairs.get(-pairSum).second > pairs.get(-pairSum).first) {
 					System.out.println(input[i] + " " + input[j] + " " + input[pairs.get(-pairSum).first]
 							+ " " + input[pairs.get(-pairSum).second]);
 				}
