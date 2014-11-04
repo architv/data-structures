@@ -105,6 +105,40 @@ public class Miscellaneous {
 		return longestSubstring;
 	}
 	
+	public static int stepProblemIterative(int noOfSteps) {
+		
+		if (noOfSteps == 0) {
+			return 0;
+		}
+		
+		int first = 1;
+		int second = 2;
+		int third = 4;
+		
+		if (noOfSteps == 1) {
+			return first;
+		}
+		
+		if (noOfSteps == 2) {
+			return second;
+		}
+		
+		if (noOfSteps == 3) {
+			return third;
+		}
+		
+		int sum = 0;
+		
+		for (int i = 4; i < noOfSteps; i++) {
+			sum += first + second + third;
+			first = second;
+			second = third;
+			third = sum;
+		}
+		
+		return first + second + third;
+	}
+	
 	public static int maximumWalk (int[] inputArray1, int[] inputArray2) {
 		
 		int sum = 0;
