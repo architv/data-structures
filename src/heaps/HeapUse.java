@@ -15,7 +15,6 @@ public class HeapUse {
 		while (!heap.isEmpty()) {
 			System.out.println(heap.removeMin());
 		}
-
 	}
 
 }

@@ -1,5 +1,8 @@
 package miscellaneous;
 
+import java.io.ObjectInputStream.GetField;
+import java.util.ArrayList;
+
 public class Miscellaneous {
 	
 	public static int rotatedArray(int[] input) {
@@ -189,16 +192,72 @@ public class Miscellaneous {
 		return sum;
 	}
 	
+//	public static int random5() {
+//		return random7()
+//	}
+	
+	public static int compressedStringLength (ArrayList<String> strings, ArrayList<Integer> numbers, int endIndex) {
+		int totalLength = 0;
+		for (int i = 0; i <= endIndex; i++) {
+			totalLength = (totalLength + strings.get(i).length()) * numbers.get(i);
+		}
+		return totalLength;
+	}
+	
+	// takes as input a string array, integer array, endIndex and an index and returns the character at that index
+	public static char getiTHIndexInCompressedStringHelper (ArrayList<String> strings,
+			ArrayList<Integer> numbers, int index, int endIndex) {
+		if (endIndex == 0) {
+//			int totalStringLength = compressedStringLength(strings, numbers, endIndex);
+			int newIndex = index % strings.get(0).length();
+			return strings.get(0).charAt(newIndex);
+		}
+		
+		int totalStringLength = compressedStringLength(strings, numbers, endIndex);
+		int lengthOfEachSection = totalStringLength / numbers.get(endIndex);
+		
+		int numberOfSectionsBefore = index / lengthOfEachSection;
+		
+		int newIndex = index - numberOfSectionsBefore * lengthOfEachSection;
+		
+		int leftPartLength = lengthOfEachSection - strings.get(endIndex).length();
+		
+		if (newIndex >= leftPartLength) {
+//			int indexInSmallString = strings.get(endIndex).length(); 
+			return strings.get(endIndex).charAt(newIndex - leftPartLength);
+		}
+		
+		return getiTHIndexInCompressedStringHelper(strings, numbers, newIndex, endIndex - 1);
+	}
+	
+	
+	public static void parseString (String input, int index) {
+//		String currentString;
+//		boolean isLastInt = false;
+//		
+//		ArrayList<String> cu
+	}
+	
 	public static void main(String[] args) {
 //		int[] input = {3,4,5,6,7,1,2};
 //		System.out.println(rotatedArray(input));
 //		System.out.println(palindromeSubstrings("abba"));
 //		codeString(123);
 //		System.out.println(longestSubstring("aaaabbcccccdddeeeeff"));
-		int[] input1 = {2,4,6,8,10,12,13,16,18,21};
-		int[] input2 = {1,4,5,7,8,11,13,19,20};
-		
-		System.out.println(maximumWalk(input1, input2));
+//		int[] input1 = {2,4,6,8,10,12,13,16,18,21};
+//		int[] input2 = {1,4,5,7,8,11,13,19,20};
+//		
+//		System.out.println(maximumWalk(input1, input2));
+		ArrayList<String> strings = new ArrayList<String>();
+		strings.add("a");
+		strings.add("b");
+		strings.add("c");
+		ArrayList<Integer> numbers = new ArrayList<Integer>();
+		numbers.add(3);
+		numbers.add(4);
+		numbers.add(5);
+		System.out.println(getiTHIndexInCompressedStringHelper(strings, numbers,83, strings.size() - 1));
+//		System.out.println(compressedStringLength(strings, numbers, strings.size() - 1));
 	}
 
 }
