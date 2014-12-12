@@ -48,9 +48,33 @@ public class TreesProblems {
 		return null;
 	}
 	
+	public static BinaryTreeNode<Integer> lcaBST (
+			BinaryTreeNode<Integer> root,
+			BinaryTreeNode<Integer> firstNode,
+			BinaryTreeNode<Integer> secondNode) {
+		
+		if (root == null) {
+			return null;
+		}
+		
+		if (firstNode.data < root.data && secondNode.data < root.data) {
+			return lcaBST(root.left, firstNode, secondNode);
+		} 
+		
+		else if (firstNode.data > root.data && secondNode.data > root.data) {
+			return lcaBST(root.right, firstNode, secondNode);
+		}
+		
+		else {
+			return root;
+		}
+	}
+	
 	public static void main(String[] args) {
 		BinaryTreeNode<Integer> root = BinaryTree.takeIntegerInput();
-		BinaryTreeNode<Integer> ancestor = lca(root, root.left.left, root.left.right);
+//		BinaryTreeNode<Integer> ancestor = lca(root, root.left.left, root.left.right);
+//		System.out.println(ancestor.data);
+		BinaryTreeNode<Integer> ancestor = lcaBST(root, root.left, root.right);
 		System.out.println(ancestor.data);
 	}
 }
